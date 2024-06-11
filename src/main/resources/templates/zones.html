@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Liste des zones</title>
+</head>
+<body>
+<h1>Liste des zones</h1>
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Nom</th>
+        <th>Actions</th>
+    </tr>
+    <tr th:each="zone : ${zones}">
+        <td th:text="${zone.idZone}"></td>
+        <td th:text="${zone.nomZone}"></td>
+        <td>
+            <a th:href="@{/zones/{id}(id=${zone.idZone})}">Détails</a>
+            <a th:href="@{/zones/{id}/edit(id=${zone.idZone})}">Modifier</a>
+            <a th:href="@{/zones/{id}/delete(id=${zone.idZone})}">Supprimer</a>
+        </td>
+    </tr>
+</table>
+<a href="/zones/new">Ajouter une nouvelle zone</a>
+</body>
+</html>

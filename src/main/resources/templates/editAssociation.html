@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <title>Modifier l'association</title>
+</head>
+<body>
+<h1>Modifier l'association</h1>
+<form th:action="@{/associations/{id}(id=${association.idAssociation})}" th:object="${association}" method="post">
+    <input type="hidden" th:field="*{idAssociation}"/>
+
+    <label for="nomAssociation">Nom :</label>
+    <input type="text" id="nomAssociation" th:field="*{nomAssociation}"/>
+    <br/>
+
+    <label for="zone">Zone :</label>
+    <select id="zone" th:field="*{zone.idZone}">
+        <option th:each="zone : ${zones}" th:value="${zone.idZone}" th:text="${zone.nomZone}"></option>
+    </select>
+    <br/>
+
+    <button type="submit">Enregistrer</button>
+</form>
+<a th:href="@{/associations}">Retour à la liste</a>
+</body>
+</html>

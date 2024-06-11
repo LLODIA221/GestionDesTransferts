@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Liste des transferts</title>
+</head>
+<body>
+<h1>Liste des transferts</h1>
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Joueur</th>
+        <th>Association d'arrivée</th>
+        <th>Association de départ</th>
+        <th>Date de transfert</th>
+        <th>Actions</th>
+    </tr>
+    <tr th:each="transfer : ${transfers}">
+        <td th:text="${transfer.idTransfert}"></td>
+        <td th:text="${transfer.joueur.nom}"></td>
+        <td th:text="${transfer.associationArrive.nomAssociation}"></td>
+        <td th:text="${transfer.associationDepart.nomAssociation}"></td>
+        <td th:text="${transfer.dateTransfert}"></td>
+        <td>
+            <a th:href="@{/transfers/{id}(id=${transfer.idTransfert})}">Détails</a>
+            <a th:href="@{/transfers/{id}/edit(id=${transfer.idTransfert})}">Modifier</a>
+            <a th:href="@{/transfers/{id}/delete(id=${transfer.idTransfert})}">Supprimer</a>
+        </td>
+    </tr>
+</table>
+<a href="/transfers/new">Ajouter un nouveau transfert</a>
+</body>
+</html>

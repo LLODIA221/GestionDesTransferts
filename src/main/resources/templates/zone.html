@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Détails de la zone</title>
+</head>
+<body>
+<h1>Détails de la zone</h1>
+<p>ID : <span th:text="${zone.idZone}"></span></p>
+<p>Nom : <span th:text="${zone.nomZone}"></span></p>
+<a th:href="@{/zones/{id}/edit(id=${zone.idZone})}">Modifier</a>
+<a th:href="@{/zones}">Retour à la liste</a>
+</body>
+</html>

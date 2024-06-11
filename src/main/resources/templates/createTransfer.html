@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <title>Créer un nouveau transfert</title>
+</head>
+<body>
+<h1>Créer un nouveau transfert</h1>
+<form th:action="@{/transfers}" th:object="${transfer}" method="post">
+    <label for="joueur">Joueur :</label>
+    <select id="joueur" th:field="*{joueur.idJoueur}">
+        <option th:each="player : ${players}" th:value="${player.idJoueur}" th:text="${player.nom}"></option>
+    </select>
+    <br/>
+
+    <label for="associationArrive">Association d'arrivée :</label>
+    <select id="associationArrive" th:field="*{associationArrive.idAssociation}">
+        <option th:each="association : ${associations}" th:value="${association.idAssociation}" th:text="${association.nomAssociation}"></option>
+    </select>
+    <br/>
+
+    <label for="associationDepart">Association de départ :</label>
+    <select id="associationDepart" th:field="*{associationDepart.idAssociation}">
+        <option th:each="association : ${associations}" th:value="${association.idAssociation}" th:text="${association.nomAssociation}"></option>
+    </select>
+    <br/>
+
+    <label for="dateTransfert">Date de transfert :</label>
+    <input type="text" id="dateTransfert" th:field="*{dateTransfert}"/>
+    <br/>
+
+    <button type="submit">Enregistrer</button>
+</form>
+<a th:href="@{/transfers}">Retour à la liste</a>
+</body>
+</html>

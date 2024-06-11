@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <title>Liste des joueurs</title>
+</head>
+<body>
+<h1>Liste des joueurs</h1>
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Numéro d'identité</th>
+        <th>Nom</th>
+        <th>Date de naissance</th>
+        <th>Lieu de naissance</th>
+        <th>Téléphone</th>
+        <th>Résidence</th>
+        <th>Association</th>
+        <th>Actions</th>
+    </tr>
+    <tr th:each="player : ${players}">
+        <td th:text="${player.idJoueur}"></td>
+        <td th:text="${player.numeroIdentite}"></td>
+        <td th:text="${player.nom}"></td>
+        <td th:text="${player.dateDeNaissance}"></td>
+        <td th:text="${player.lieuDeNaissance}"></td>
+        <td th:text="${player.telephone}"></td>
+        <td th:text="${player.residence}"></td>
+        <td th:text="${player.association?.nomAssociation}"></td>
+        <td>
+            <a th:href="@{/players/{id}(id=${player.idJoueur})}">Détails</a>
+            <a th:href="@{/players/{id}/edit(id=${player.idJoueur})}">Modifier</a>
+            <a th:href="@{/players/{id}/delete(id=${player.idJoueur})}">Supprimer</a>
+        </td>
+    </tr>
+</table>
+<a href="/players/new">Ajouter un nouveau joueur</a>
+</body>
+</html>

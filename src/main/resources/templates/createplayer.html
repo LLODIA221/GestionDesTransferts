@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <title>Créer un nouveau joueur</title>
+</head>
+<body>
+<h1>Créer un nouveau joueur</h1>
+<form th:action="@{/players}" th:object="${player}" method="post">
+    <label for="numeroIdentite">Numéro d'identité :</label>
+    <input type="text" id="numeroIdentite" th:field="*{numeroIdentite}"/>
+    <br/>
+
+    <label for="nom">Nom :</label>
+    <input type="text" id="nom" th:field="*{nom}"/>
+    <br/>
+
+    <label for="dateDeNaissance">Date de naissance :</label>
+    <input type="text" id="dateDeNaissance" th:field="*{dateDeNaissance}"/>
+    <br/>
+
+    <label for="lieuDeNaissance">Lieu de naissance :</label>
+    <input type="text" id="lieuDeNaissance" th:field="*{lieuDeNaissance}"/>
+    <br/>
+
+    <label for="telephone">Téléphone :</label>
+    <input type="text" id="telephone" th:field="*{telephone}"/>
+    <br/>
+
+    <label for="residence">Résidence :</label>
+    <input type="text" id="residence" th:field="*{residence}"/>
+    <br/>
+
+    <label for="association">Association :</label>
+    <select id="association" th:field="*{association.idAssociation}">
+        <option th:each="association : ${associations}" th:value="${association.idAssociation}" th:text="${association.nomAssociation}"></option>
+    </select>
+    <br/>
+
+    <button type="submit">Enregistrer</button>
+</form>
+<a th:href="@{/players}">Retour à la liste</a>
+</body>
+</html>
