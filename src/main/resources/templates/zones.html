@@ -2,8 +2,9 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Liste des zones</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
-<body>
+<body class="container">
 <h1>Liste des zones</h1>
 <table>
     <tr>
@@ -15,12 +16,12 @@
         <td th:text="${zone.idZone}"></td>
         <td th:text="${zone.nomZone}"></td>
         <td>
-            <a th:href="@{/zones/{id}(id=${zone.idZone})}">Détails</a>
-            <a th:href="@{/zones/{id}/edit(id=${zone.idZone})}">Modifier</a>
-            <a th:href="@{/zones/{id}/delete(id=${zone.idZone})}">Supprimer</a>
+            <a class="btn" th:href="@{/zones/{id}(id=${zone.idZone})}">Détails</a>
+            <a class="btn" th:href="@{/zones/{id}/edit(id=${zone.idZone})}">Modifier</a>
+            <a class="btn" th:href="@{/zones/{id}/delete(id=${zone.idZone})}">Supprimer</a>
         </td>
     </tr>
 </table>
-<a href="/zones/new">Ajouter une nouvelle zone</a>
+<a class="btn" href="/zones/new">Ajouter une nouvelle zone</a>
 </body>
 </html>

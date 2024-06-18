@@ -46,6 +46,8 @@ public class AssociationController {
     @GetMapping("/{id}/edit")
     public String editAssociationForm(@PathVariable Long id, Model model) {
         model.addAttribute("association", associationService.getAssociationById(id));
+        List<Zone> zones = zoneService.getAllZones();
+        model.addAttribute("zones", zones);
         return "editAssociation";
     }
 
@@ -53,6 +55,8 @@ public class AssociationController {
     public String updateAssociation(@PathVariable Long id, @ModelAttribute Association association) {
         Association existingAssociation = associationService.getAssociationById(id);
         // Update the association fields with the new data
+        existingAssociation.setNomAssociation(association.getNomAssociation());
+        existingAssociation.setZone(association.getZone());
         associationService.saveAssociation(existingAssociation);
         return "redirect:/associations";
     }

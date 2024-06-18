@@ -4,7 +4,7 @@
     <link rel="stylesheet" th:href="@{/css/style.css}">
     <title>Modifier la zone</title>
 </head>
-<body>
+<body class="container">
 <h1>Modifier la zone</h1>
 <form th:action="@{/zones/{id}(id=${zone.idZone})}" th:object="${zone}" method="post">
     <input type="hidden" th:field="*{idZone}"/>
@@ -13,8 +13,8 @@
     <input type="text" id="nomZone" th:field="*{nomZone}"/>
     <br/>
 
-    <button type="submit">Enregistrer</button>
+    <button type="submit" class="btn">Enregistrer</button>
 </form>
-<a th:href="@{/zones}">Retour à la liste</a>
+<a class="btn" th:href="@{/zones}">Retour à la liste</a>
 </body>
 </html>

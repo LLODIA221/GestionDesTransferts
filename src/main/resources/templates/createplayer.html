@@ -4,9 +4,9 @@
     <link rel="stylesheet" th:href="@{/css/style.css}">
     <title>Créer un nouveau joueur</title>
 </head>
-<body>
+<body class="container">
 <h1>Créer un nouveau joueur</h1>
-<form th:action="@{/players}" th:object="${player}" method="post">
+<form class="container" th:action="@{/players}" th:object="${player}" method="post">
     <label for="numeroIdentite">Numéro d'identité :</label>
     <input type="text" id="numeroIdentite" th:field="*{numeroIdentite}"/>
     <br/>
@@ -37,8 +37,8 @@
     </select>
     <br/>
 
-    <button type="submit">Enregistrer</button>
+    <button type="submit" class="btn">Enregistrer</button>
 </form>
-<a th:href="@{/players}">Retour à la liste</a>
+<a class="btn" th:href="@{/players}">Retour à la liste</a>
 </body>
 </html>

@@ -4,12 +4,12 @@
     <link rel="stylesheet" th:href="@{/css/style.css}">
     <title>Détails de l'association</title>
 </head>
-<body>
+<body class="container">
 <h1>Détails de l'association</h1>
 <p>ID : <span th:text="${association.idAssociation}"></span></p>
 <p>Nom : <span th:text="${association.nomAssociation}"></span></p>
 <p>Zone : <span th:text="${association.zone?.nomZone}"></span></p>
-<a th:href="@{/associations/{id}/edit(id=${association.idAssociation})}">Modifier</a>
-<a th:href="@{/associations}">Retour à la liste</a>
+<a class="btn" th:href="@{/associations/{id}/edit(id=${association.idAssociation})}">Modifier</a>
+<a class="btn" th:href="@{/associations}">Retour à la liste</a>
 </body>
 </html>

@@ -4,9 +4,9 @@
     <link rel="stylesheet" th:href="@{/css/style.css}">
     <title>Créer une nouvelle association</title>
 </head>
-<body>
+<body class="container">
 <h1>Créer une nouvelle association</h1>
-<form th:action="@{/associations}" th:object="${association}" method="post">
+<form class="container" th:action="@{/associations}" th:object="${association}" method="post">
     <label for="nomAssociation">Nom :</label>
     <input type="text" id="nomAssociation" th:field="*{nomAssociation}"/>
     <br/>
@@ -17,8 +17,8 @@
     </select>
     <br/>
 
-    <button type="submit">Enregistrer</button>
+    <button type="submit" class="btn">Enregistrer</button>
 </form>
-<a th:href="@{/associations}">Retour à la liste</a>
+<a class="btn" th:href="@{/associations}">Retour à la liste</a>
 </body>
 </html>

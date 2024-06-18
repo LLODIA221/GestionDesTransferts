@@ -4,7 +4,7 @@
     <link rel="stylesheet" th:href="@{/css/style.css}">
     <title>Liste des associations</title>
 </head>
-<body>
+<body class="container">
 <h1>Liste des associations</h1>
 <table>
     <tr>
@@ -18,12 +18,12 @@
         <td th:text="${association.nomAssociation}"></td>
         <td th:text="${association.zone?.nomZone}"></td>
         <td>
-            <a th:href="@{/associations/{id}(id=${association.idAssociation})}">Détails</a>
-            <a th:href="@{/associations/{id}/edit(id=${association.idAssociation})}">Modifier</a>
-            <a th:href="@{/associations/{id}/delete(id=${association.idAssociation})}">Supprimer</a>
+            <a class="btn" th:href="@{/associations/{id}(id=${association.idAssociation})}">Détails</a>
+            <a class="btn" th:href="@{/associations/{id}/edit(id=${association.idAssociation})}">Modifier</a>
+            <a class="btn" th:href="@{/associations/{id}/delete(id=${association.idAssociation})}">Supprimer</a>
         </td>
     </tr>
 </table>
-<a href="/associations/new">Ajouter une nouvelle association</a>
+<a class="btn" href="/associations/new">Ajouter une nouvelle association</a>
 </body>
 </html>

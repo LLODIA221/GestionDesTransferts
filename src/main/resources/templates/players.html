@@ -4,7 +4,7 @@
     <link rel="stylesheet" th:href="@{/css/style.css}">
     <title>Liste des joueurs</title>
 </head>
-<body>
+<body class="container">
 <h1>Liste des joueurs</h1>
 <table>
     <tr>
@@ -28,12 +28,12 @@
         <td th:text="${player.residence}"></td>
         <td th:text="${player.association?.nomAssociation}"></td>
         <td>
-            <a th:href="@{/players/{id}(id=${player.idJoueur})}">Détails</a>
-            <a th:href="@{/players/{id}/edit(id=${player.idJoueur})}">Modifier</a>
-            <a th:href="@{/players/{id}/delete(id=${player.idJoueur})}">Supprimer</a>
+            <a class="btn" th:href="@{/players/{id}(id=${player.idJoueur})}">Détails</a>
+            <a class="btn" th:href="@{/players/{id}/edit(id=${player.idJoueur})}">Modifier</a>
+            <a class="btn" th:href="@{/players/{id}/delete(id=${player.idJoueur})}">Supprimer</a>
         </td>
     </tr>
 </table>
-<a href="/players/new">Ajouter un nouveau joueur</a>
+<a class="btn" href="/players/new">Ajouter un nouveau joueur</a>
 </body>
 </html>

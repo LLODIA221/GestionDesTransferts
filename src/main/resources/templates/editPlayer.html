@@ -4,7 +4,7 @@
     <link rel="stylesheet" th:href="@{/css/style.css}">
     <title>Modifier le joueur</title>
 </head>
-<body>
+<body class="container">
 <h1>Modifier le joueur</h1>
 <form th:action="@{/players/{id}(id=${player.idJoueur})}" th:object="${player}" method="post">
     <input type="hidden" th:field="*{idJoueur}"/>
@@ -39,8 +39,8 @@
     </select>
     <br/>
 
-    <button type="submit">Enregistrer</button>
+    <button type="submit" class="btn">Enregistrer</button>
 </form>
-<a th:href="@{/players}">Retour à la liste</a>
+<a class="btn" th:href="@{/players}">Retour à la liste</a>
 </body>
 </html>

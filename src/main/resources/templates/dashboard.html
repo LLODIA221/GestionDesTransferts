@@ -5,53 +5,54 @@
     <title>Dashboad</title>
 
 </head>
-<body>
-<div class="container">
-    <div class="sidebar">
-        <h2>Tableau de bord</h2>
-        <div class="button-container">
-            <!-- Afficher le lien "Produit" pour les rôles 'ADMIN' et 'USER' -->
-            <a href="index.html">Produit</a>
-            <!-- Afficher les liens pour le rôle 'ADMIN' -->
-            <div th:if="${#authentication.principal.authorities.contains('ADMIN')}">
-                <a href="">Client</a>
-                <a href="">Approvisionnement</a>
-                <a href="">Ventes</a>
-                <a href="">Statistiques</a>
-                <a href="">Utilisateurs</a>
-                <a href="">Paramètres</a>
-            </div>
-            <a href="" th:href="@{/logout}">Déconnexion</a>
+<body class="container">
+<div class="sidebar">
+    <h2>Tableau de bord</h2>
+    <div class="button-container">
+        <!-- Afficher le lien "Produit" pour les rôles 'ADMIN' et 'USER' -->
+        <a href="index.html">Produit</a>
+        <!-- Afficher les liens pour le rôle 'ADMIN' -->
+        <div th:if="${#authentication.principal.authorities.contains('ADMIN')}">
+            <a href="">Client</a>
+            <a href="">Approvisionnement</a>
+            <a href="">Ventes</a>
+            <a href="">Statistiques</a>
+            <a href="">Utilisateurs</a>
+            <a href="">Paramètres</a>
+        </div>
+        <a href="" th:href="@{/logout}">Déconnexion</a>
+    </div>
+</div>
+<div class="main-content">
+    <h2>Exemples de statistiques</h2>
+    <div class="statistics">
+        <div class="statistic">
+            <h3>Total des ventes</h3>
+            <p>1000€</p>
+        </div>
+        <div class="statistic">
+            <h3>Nombre de clients</h3>
+            <p>500</p>
+        </div>
+        <div class="statistic">
+            <h3>Produits en stock</h3>
+            <p>200</p>
         </div>
     </div>
-    <div class="main-content">
-        <h2>Exemples de statistiques</h2>
-        <div class="statistics">
-            <div class="statistic">
-                <h3>Total des ventes</h3>
-                <p>1000€</p>
-            </div>
-            <div class="statistic">
-                <h3>Nombre de clients</h3>
-                <p>500</p>
-            </div>
-            <div class="statistic">
-                <h3>Produits en stock</h3>
-                <p>200</p>
-            </div>
-        </div>
 
-        <!-- Afficher les détails des ventes pour le rôle 'ADMIN' -->
-        <div th:if="${#authentication.principal.authorities.contains('ADMIN')}">
-            <h2>Détails des ventes</h2>
-            <!-- Contenu spécifique aux détails des ventes -->
-        </div>
 
-        <!-- Afficher les détails des approvisionnements pour le rôle 'ADMIN' -->
-        <div th:if="${#authentication.principal.authorities.contains('ADMIN')}">
-            <h2>Détails des approvisionnements</h2>
-            <!-- Contenu spécifique aux détails des approvisionnements -->
-        </div>
+    <div th:if="${#authentication.principal.authorities.contains('ADMIN')}">
+        <h2>Détails des ventes</h2>
+
+    </div>
+
+
+    <div th:if="${#authentication.principal.authorities.contains('ADMIN')}">
+        <h2>Détails des approvisionnements</h2>
+
+    </div>
+    <div th:if="${#authentication.principal.authorities.contains('ADMIN')}">
+        <h2>Détails des clients</h2>
     </div>
 </div>
 </body>

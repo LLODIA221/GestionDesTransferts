@@ -4,7 +4,7 @@
     <link rel="stylesheet" th:href="@{/css/style.css}">
     <title>Détails du joueur</title>
 </head>
-<body>
+<body class="container">
 <h1>Détails du joueur</h1>
 <p>ID : <span th:text="${player.idJoueur}"></span></p>
 <p>Numéro d'identité : <span th:text="${player.numeroIdentite}"></span></p>
@@ -14,7 +14,7 @@
 <p>Téléphone : <span th:text="${player.telephone}"></span></p>
 <p>Résidence : <span th:text="${player.residence}"></span></p>
 <p>Association : <span th:text="${player.association?.nomAssociation}"></span></p>
-<a th:href="@{/players/{id}/edit(id=${player.idJoueur})}">Modifier</a>
-<a th:href="@{/players}">Retour à la liste</a>
+<a class="btn" th:href="@{/players/{id}/edit(id=${player.idJoueur})}">Modifier</a>
+<a class="btn" th:href="@{/players}">Retour à la liste</a>
 </body>
 </html>

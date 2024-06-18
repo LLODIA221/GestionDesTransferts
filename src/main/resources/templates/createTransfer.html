@@ -4,9 +4,9 @@
     <link rel="stylesheet" th:href="@{/css/style.css}">
     <title>Créer un nouveau transfert</title>
 </head>
-<body>
+<body class="container">
 <h1>Créer un nouveau transfert</h1>
-<form th:action="@{/transfers}" th:object="${transfer}" method="post">
+<form class="container" th:action="@{/transfers}" th:object="${transfer}" method="post">
     <label for="joueur">Joueur :</label>
     <select id="joueur" th:field="*{joueur.idJoueur}">
         <option th:each="player : ${players}" th:value="${player.idJoueur}" th:text="${player.nom}"></option>
@@ -29,8 +29,8 @@
     <input type="text" id="dateTransfert" th:field="*{dateTransfert}"/>
     <br/>
 
-    <button type="submit">Enregistrer</button>
+    <button type="submit" class="btn">Enregistrer</button>
 </form>
-<a th:href="@{/transfers}">Retour à la liste</a>
+<a class="btn" th:href="@{/transfers}">Retour à la liste</a>
 </body>
 </html>

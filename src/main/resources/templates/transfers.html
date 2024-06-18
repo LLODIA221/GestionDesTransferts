@@ -2,8 +2,9 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Liste des transferts</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
-<body>
+<body class="container">
 <h1>Liste des transferts</h1>
 <table>
     <tr>
@@ -21,12 +22,12 @@
         <td th:text="${transfer.associationDepart.nomAssociation}"></td>
         <td th:text="${transfer.dateTransfert}"></td>
         <td>
-            <a th:href="@{/transfers/{id}(id=${transfer.idTransfert})}">Détails</a>
-            <a th:href="@{/transfers/{id}/edit(id=${transfer.idTransfert})}">Modifier</a>
-            <a th:href="@{/transfers/{id}/delete(id=${transfer.idTransfert})}">Supprimer</a>
+            <a class="btn" th:href="@{/transfers/{id}(id=${transfer.idTransfert})}">Détails</a>
+            <a class="btn" th:href="@{/transfers/{id}/edit(id=${transfer.idTransfert})}">Modifier</a>
+            <a class="btn" th:href="@{/transfers/{id}/delete(id=${transfer.idTransfert})}">Supprimer</a>
         </td>
     </tr>
 </table>
-<a href="/transfers/new">Ajouter un nouveau transfert</a>
+<a class="btn" href="/transfers/new">Ajouter un nouveau transfert</a>
 </body>
 </html>

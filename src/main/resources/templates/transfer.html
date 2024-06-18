@@ -2,15 +2,16 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Détails du transfert</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
-<body>
+<body class="container">
 <h1>Détails du transfert</h1>
 <p>ID : <span th:text="${transfer.idTransfert}"></span></p>
 <p>Joueur : <span th:text="${transfer.joueur.nom}"></span></p>
 <p>Association d'arrivée : <span th:text="${transfer.associationArrive.nomAssociation}"></span></p>
 <p>Association de départ : <span th:text="${transfer.associationDepart.nomAssociation}"></span></p>
 <p>Date de transfert : <span th:text="${transfer.dateTransfert}"></span></p>
-<a th:href="@{/transfers/{id}/edit(id=${transfer.idTransfert})}">Modifier</a>
-<a th:href="@{/transfers}">Retour à la liste</a>
+<a class="btn" th:href="@{/transfers/{id}/edit(id=${transfer.idTransfert})}">Modifier</a>
+<a class="btn" th:href="@{/transfers}">Retour à la liste</a>
 </body>
 </html>

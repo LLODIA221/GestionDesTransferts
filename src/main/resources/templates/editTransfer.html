@@ -3,9 +3,8 @@
 <head>
     <link rel="stylesheet" th:href="@{/css/style.css}">
     <title>Modifier le transfert</title>
-    <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
-<body>
+<body class="container">
 <h1>Modifier le transfert</h1>
 <form th:action="@{/transfers/{id}(id=${transfer.idTransfert})}" th:object="${transfer}" method="post">
     <input type="hidden" th:field="*{idTransfert}"/>
@@ -32,8 +31,8 @@
     <input type="text" id="dateTransfert" th:field="*{dateTransfert}"/>
     <br/>
 
-    <button type="submit">Enregistrer</button>
+    <button type="submit" class="btn">Enregistrer</button>
 </form>
-<a th:href="@{/transfers}">Retour à la liste</a>
+<a class="btn" th:href="@{/transfers}">Retour à la liste</a>
 </body>
 </html>

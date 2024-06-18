@@ -1,47 +1,39 @@
 <!DOCTYPE html>
-<html lang="Fr"  xmlns:th="http://www.thymeleaf.org">
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registration Form</title>
+    <title>Formulaire d'inscription</title>
     <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
-<body>
-    <div class="container">
-        <div class="message" th:if="${message != null}">
-           [[${message}]]
-        </div>
-        <h2>Registration Form</h2>
-        <form 
-         th:action="@{/registration}"
-         method="post"
-         role="form"
-         th:object="${user}"
-        >
-            <div class="form-group">
-                <label for="fullname">Fullname:</label>
-                <input th:field="*{fullname}" type="text" id="fullname" name="fullname" placeholder="Enter your fullname" required>
-            </div>
-            
-            <div class="form-group">
-                <label for="email">Email:</label>
-                <input th:field="*{email}" type="email" id="email" name="email" placeholder="Enter your email" required>
-            </div>
-            
-            <div class="form-group">
-                <label for="password">Password:</label>
-                <input th:field="*{password}" type="password" id="password" name="password" placeholder="Enter your password" required>
-            </div>
-            <div class="form-group">
-                <label for="role">Role:</label>
-                <select th:field="*{role}" id="role" name="role">
-                    <option value="USER">USER</option>
-                    <option value="ADMIN">ADMIN</option>
-                </select>
-            </div>
-            <input type="submit" value="Register">
-        </form>
-        
+<body class="container">
+<div class="message" th:if="${message != null}">
+    [[${message}]]
+</div>
+<h2>Formulaire d'inscription</h2>
+<form th:action="@{/registration}" method="post" role="form" th:object="${user}">
+    <div class="form-group">
+        <label for="fullname">Nom complet :</label>
+        <input th:field="*{fullname}" type="text" id="fullname" name="fullname" placeholder="Entrez votre nom complet" required>
     </div>
+
+    <div class="form-group">
+        <label for="email">Email :</label>
+        <input th:field="*{email}" type="email" id="email" name="email" placeholder="Entrez votre email" required>
+    </div>
+
+    <div class="form-group">
+        <label for="password">Mot de passe :</label>
+        <input th:field="*{password}" type="password" id="password" name="password" placeholder="Entrez votre mot de passe" required>
+    </div>
+    <div class="form-group">
+        <label for="role">Rôle :</label>
+        <select th:field="*{role}" id="role" name="role">
+            <option value="USER">Utilisateur</option>
+            <option value="ADMIN">Administrateur</option>
+        </select>
+    </div>
+    <input class="btn" type="submit" value="S'inscrire">
+</form>
 </body>
 </html>
