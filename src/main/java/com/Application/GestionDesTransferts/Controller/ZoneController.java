@@ -51,6 +51,7 @@ public class ZoneController {
     @PostMapping("/{id}")
     public String updateZone(@PathVariable Long id, @ModelAttribute Zone zone) {
         Zone existingZone = zoneService.getZoneById(id);
+        //mise à jour des données
 
         existingZone.setNomZone(zone.getNomZone());
         // Update the zone fields with the new data

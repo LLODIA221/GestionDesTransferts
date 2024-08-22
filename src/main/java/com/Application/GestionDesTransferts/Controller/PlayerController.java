@@ -56,6 +56,14 @@ public class PlayerController {
     public String updatePlayer(@PathVariable Long id, @ModelAttribute Player player) {
         Player existingPlayer = playerService.getPlayerById(id);
         // Update the player fields with the new data
+        existingPlayer.setNumeroIdentite(player.getNumeroIdentite());
+        existingPlayer.setNom(player.getNom());
+        existingPlayer.setResidence(player.getResidence());
+        existingPlayer.setTelephone(player.getTelephone());
+        existingPlayer.setLieuDeNaissance(player.getLieuDeNaissance());
+        existingPlayer.setDateDeNaissance(player.getDateDeNaissance());
+        existingPlayer.setAssociation(player.getAssociation());
+        //update
         playerService.savePlayer(existingPlayer);
         return "redirect:/players";
     }
@@ -67,4 +75,3 @@ public class PlayerController {
     }
 }
 
-// Similarly, create controllers for Association, Transfer, and Zone

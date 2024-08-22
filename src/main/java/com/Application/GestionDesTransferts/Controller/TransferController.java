@@ -66,6 +66,11 @@ public class TransferController {
     public String updateTransfer(@PathVariable Long id, @ModelAttribute Transfer transfer) {
         Transfer existingTransfer = transferService.getTransferById(id);
         // Update the transfer fields with the new data
+        existingTransfer.setJoueur(transfer.getJoueur());
+        existingTransfer.setAssociationArrive(transfer.getAssociationArrive());
+        existingTransfer.setAssociationDepart(transfer.getAssociationDepart());
+        existingTransfer.setDateTransfert(transfer.getDateTransfert());
+        //update
         transferService.saveTransfer(existingTransfer);
         return "redirect:/transfers";
     }

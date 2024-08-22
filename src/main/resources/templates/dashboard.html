@@ -1,58 +1,151 @@
 <!DOCTYPE html>
-<html lang="fr" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="fr" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml"
+      xmlns="http://www.w3.org/1999/html">
 <head>
     <link rel="stylesheet" th:href="@{/css/style.css}">
-    <title>Dashboad</title>
+    <title>Tableau de bord</title>
+    <style>
+        body.container {
+            display: flex;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
 
+        .sidebar {
+            width: 250px;
+            background-color: #2c3e50;
+            color: white;
+            padding: 20px;
+            box-sizing: border-box;
+            min-height: 100vh;
+        }
+
+        .sidebar h2 {
+            margin-bottom: 20px;
+        }
+
+        .sidebar a {
+            display: block;
+            padding: 10px 15px;
+            margin: 10px 0;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+        .sidebar a:hover {
+            background-color: #34495e;
+        }
+
+        .main-content {
+            flex: 1;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .main-content h2 {
+            margin-bottom: 20px;
+        }
+
+        .statistics, .parameters {
+            margin-top: 20px;
+        }
+
+        .statistics {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .statistic, .parameter {
+            background-color: #ecf0f1;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .parameters .parameter {
+            margin-bottom: 20px;
+        }
+
+        .role-display {
+            margin-bottom: 20px;
+            font-size: 1.2em;
+        }
+    </style>
 </head>
 <body class="container">
 <div class="sidebar">
     <h2>Tableau de bord</h2>
-    <div class="button-container">
-        <!-- Afficher le lien "Produit" pour les rôles 'ADMIN' et 'USER' -->
-        <a href="index.html">Produit</a>
-        <!-- Afficher les liens pour le rôle 'ADMIN' -->
-        <div th:if="${#authentication.principal.authorities.contains('ADMIN')}">
-            <a href="">Client</a>
-            <a href="">Approvisionnement</a>
-            <a href="">Ventes</a>
-            <a href="">Statistiques</a>
-            <a href="">Utilisateurs</a>
-            <a href="">Paramètres</a>
-        </div>
-        <a href="" th:href="@{/logout}">Déconnexion</a>
+    <!-- Afficher pour tous les utilisateurs -->
+    <a th:href="@{/players}">Listes des Joueurs</a>
+    <a th:href="@{/associations}">Listes des équipes</a>
+
+    <!-- Afficher uniquement pour les administrateurs -->
+    <div sec:authorize="hasAnyAuthority('ADMIN')">
+        <a th:href="@{/admin-tools}">Outils Admin</a>
+        <a th:href="@{/user-management}">Gestion des utilisateurs</a>
     </div>
+
+    <!-- Afficher uniquement pour les utilisateurs standards -->
+    <div sec:authorize="hasAnyAuthority('USER')">
+        <a th:href="@{/user-tools}">Outils Utilisateur</a>
+    </div>
+
+    <!-- Afficher pour tous les utilisateurs -->
+    <a th:href="@{/settings}">Paramètres</a>
+    <a th:href="@{/logout}">Déconnexion</a>
 </div>
+
 <div class="main-content">
-    <h2>Exemples de statistiques</h2>
-    <div class="statistics">
+    <div class="role-display">
+        <h2> Bienvenue, <span  th:text="${username}">Bonjour utilisateur</span> </h2>
+        <p>Rôles attribués :</p>
+        <ul>
+            <li th:each="authority : ${#authentication.principal.authorities}" th:text="${authority.getAuthority()}"></li>
+        </ul>
+    </div>
+
+    <h2>STATISTIQUES</h2>
+
+    <!-- Afficher des statistiques spécifiques aux administrateurs -->
+    <div class="statistics" sec:authorize="hasAnyAuthority('ADMIN')">
         <div class="statistic">
-            <h3>Total des ventes</h3>
-            <p>1000€</p>
+            <h3>Nombre d'equipes</h3>
+            <p th:text="${nbEquipe}"></p>
         </div>
         <div class="statistic">
-            <h3>Nombre de clients</h3>
-            <p>500</p>
+            <h3>Nombre de joueurs</h3>
+            <p th:text="${nbJoueurs}"></p>
         </div>
         <div class="statistic">
-            <h3>Produits en stock</h3>
-            <p>200</p>
+            <h3>Nombre de zones</h3>
+            <p th:text="${nbZone}"></p>
+        </div>
+        <div class="statistic">
+            <h3>Nombre de transfert</h3>
+            <p th:text="${transfer}"></p>
         </div>
     </div>
 
-
-    <div th:if="${#authentication.principal.authorities.contains('ADMIN')}">
-        <h2>Détails des ventes</h2>
-
+    <!-- Afficher des statistiques spécifiques aux utilisateurs standards -->
+    <div class="statistics" sec:authorize="hasAnyAuthority('USER')">
+        <div class="statistic">
+            <h3>Nombre d'equipes</h3>
+            <p th:text="${nbEquipes}"></p>
+        </div>
+        <div class="statistic">
+            <h3>Nombre de joueurs</h3>
+            <p th:text="${nbJoueurs}"></p>
+        </div>
     </div>
 
-
-    <div th:if="${#authentication.principal.authorities.contains('ADMIN')}">
-        <h2>Détails des approvisionnements</h2>
-
-    </div>
-    <div th:if="${#authentication.principal.authorities.contains('ADMIN')}">
-        <h2>Détails des clients</h2>
+    <!-- Afficher les paramètres pour les administrateurs uniquement -->
+    <div class="parameters" sec:authorize="hasAnyAuthority('ADMIN')">
+        <div class="parameter">
+            <a th:href="@{/admin-settings}">Paramètres Admin</a>
+        </div>
     </div>
 </div>
 </body>

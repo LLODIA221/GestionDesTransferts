@@ -1,52 +1,79 @@
-  body {
-            background-color: #F8F8FF;
-            font-family: Arial, sans-serif;
-        }
+/* Style de base pour le conteneur */
+.container {
+    width: 80%;
+    margin: auto;
+    padding: 20px;
+}
 
-        .container {
-            width: 80%;
-            margin: 0 auto;
-            padding: 20px;
-            background-color: #FFF;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
+/* Styles pour les boutons */
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    margin: 5px;
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+}
 
-        h1 {
-            text-align: center;
-            margin-bottom: 20px;
-        }
+.btn:hover {
+    background-color: #0056b3;
+}
 
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
+/* Styles pour les titres */
+h1 {
+    color: #333;
+}
 
-        th, td {
-            text-align: left;
-            padding: 8px;
-            border: 1px solid #ddd;
-        }
+/* Styles pour les tables */
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
 
-        th {
-            background-color: #f0f0f0;
-        }
+th, td {
+    padding: 10px;
+    border: 1px solid #ddd;
+}
 
-        .pagination {
-            text-align: center;
-            margin-top: 20px;
-        }
+th {
+    background-color: #f2f2f2;
+}
 
-        .pagination a {
-            display: inline-block;
-            padding: 5px 10px;
-            background-color: #ddd;
-            border: 1px solid #ccc;
-            text-decoration: none;
-            color: #000;
-        }
+tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
 
-        .pagination a.active {
-            background-color: #4CAF50;
-            color: white;
-        }
+/* Sidebar style */
+.sidebar {
+    float: left;
+    width: 20%;
+    background-color: #f0f0f0;
+    padding: 20px;
+}
+
+.main-content {
+    float: right;
+    width: 75%;
+}
+
+/* Clear floats after the columns */
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+/* Statistic boxes */
+.statistic {
+    margin: 20px 0;
+    padding: 20px;
+    background-color: #fafafa;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.message {
+    color: red;
+    margin: 10px 0;
+}

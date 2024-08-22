@@ -1,8 +1,4 @@
 package com.Application.GestionDesTransferts.Controller;
-
-
-
-
 import com.Application.GestionDesTransferts.Dto.UserDto;
 import com.Application.GestionDesTransferts.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,17 +39,29 @@ public class UserController {
 
     @GetMapping("user-page")
     public String userPage(Model model, Principal principal) {
-        UserDetails userDetails = userDetailsService.loadUserByUsername(principal.getName());
-        model.addAttribute("user", userDetails);
-        return "dashboard";
+        UserDto userDto = new UserDto();
+        userDto.setEmail(principal.getName());
+        //recuperation du role de l'utilisateurteur
+        model.addAttribute("role", userDetailsService.loadUserByUsername(principal.getName()).getAuthorities());
+        model.addAttribute("user", userDto);
+        return "redirect:/dashboard";
 
     }
+
 
     @GetMapping("admin-page")
     public String adminPage(Model model, Principal principal) {
-        UserDetails userDetails = userDetailsService.loadUserByUsername(principal.getName());
-        model.addAttribute("user", userDetails);
-        return "dashboard";
+      UserDto userDto = new UserDto();
+      userDto.setEmail(principal.getName());
+      //recuperation du role de l'utilisateurteur
+        model.addAttribute("role", userDetailsService.loadUserByUsername(principal.getName()).getAuthorities());
+      model.addAttribute("user", userDto);
+        model.addAttribute("fullname", userDto.getFullname());
+
+
+        return "redirect:/dashboard";
+
     }
+
 
 }

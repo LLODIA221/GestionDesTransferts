@@ -20,8 +20,6 @@ public class User {
     private String role;
     private String fullname;
 
-    //@OneToMany(mappedBy = "utilisateur", cascade = CascadeType.ALL)
-//    private List<Journal> journaux;
 
     public User() {
         super();
