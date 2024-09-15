@@ -3,7 +3,7 @@ package com.Application.GestionDesTransferts.Models;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.List;
+
 
 
 @Getter

@@ -81,6 +81,8 @@
     <!-- Afficher pour tous les utilisateurs -->
     <a th:href="@{/players}">Listes des Joueurs</a>
     <a th:href="@{/associations}">Listes des équipes</a>
+    <a th:href="@{/zones}">Listes des Zones</a>
+    <a th:href="@{/transfers}">Listes des tranferts</a>
 
     <!-- Afficher uniquement pour les administrateurs -->
     <div sec:authorize="hasAnyAuthority('ADMIN')">

@@ -11,4 +11,5 @@ public interface UserService {
     User save (UserDto userDto);
 
     Optional<User> getUserById(Long id);
+    User findbyEmail(String email);
 }

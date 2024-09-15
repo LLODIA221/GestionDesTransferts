@@ -15,6 +15,24 @@
     text-decoration: none;
     border-radius: 5px;
 }
+.btn-danger {
+    display: inline-block;
+    padding: 10px 20px;
+    margin: 5px;
+    background-color: #ff0000;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+}
+.btn-warning{
+display: inline-block;
+    padding: 10px 20px;
+    margin: 5px;
+    background-color: #ffc107;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+}
 
 .btn:hover {
     background-color: #0056b3;
@@ -76,4 +94,21 @@ tr:nth-child(even) {
 .message {
     color: red;
     margin: 10px 0;
+}
+/* Styles pour les sélecteurs */
+select {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+/* Styles pour les champs de texte */
+input[type="text"] {
+    width: 80%;
+    padding: 10px;
+    margin: 5px 0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
 }

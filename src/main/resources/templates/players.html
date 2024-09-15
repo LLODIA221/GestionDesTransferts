@@ -29,11 +29,14 @@
         <td th:text="${player.association?.nomAssociation}"></td>
         <td>
             <a class="btn" th:href="@{/players/{id}(id=${player.idJoueur})}">Détails</a>
-            <a class="btn" th:href="@{/players/{id}/edit(id=${player.idJoueur})}">Modifier</a>
-            <a class="btn" th:href="@{/players/{id}/delete(id=${player.idJoueur})}">Supprimer</a>
+            <a class="btn-warning" th:href="@{/players/{id}/edit(id=${player.idJoueur})}">Modifier</a>
+            <a class="btn-danger" th:href="@{/players/{id}/delete(id=${player.idJoueur})}">Supprimer</a>
         </td>
     </tr>
 </table>
+<div class="parameters" >
 <a class="btn" href="/players/new">Ajouter un nouveau joueur</a>
+<a class="btn" th:href="@{/associations}">Retour à la liste</a>
+</div >
 </body>
 </html>

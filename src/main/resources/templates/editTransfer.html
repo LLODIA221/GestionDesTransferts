@@ -10,9 +10,10 @@
     <input type="hidden" th:field="*{idTransfert}"/>
 
     <label for="joueur">Joueur :</label>
-    <select id="joueur" th:field="*{joueur}">
-        <option th:each="player : ${players}" th:value="${player}" th:text="${player.nom}"></option>
+    <select id="joueur" th:field="*{joueur.idJoueur}">
+        <option th:each="player : ${players}" th:value="${player.idJoueur}" th:text="${player.nom}"></option>
     </select>
+
     <br/>
 
     <label for="associationArrive">Association d'arrivée :</label>
@@ -28,7 +29,7 @@
     <br/>
 
     <label for="dateTransfert">Date de transfert :</label>
-    <input type="text" id="dateTransfert" th:field="*{dateTransfert}"/>
+    <input type="date" id="dateTransfert" th:field="*{dateTransfert}"/>
     <br/>
 
     <button type="submit" class="btn">Enregistrer</button>
