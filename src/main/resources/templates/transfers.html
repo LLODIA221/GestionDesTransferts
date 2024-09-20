@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <title>Liste des transferts</title>
     <link rel="stylesheet" th:href="@{/css/style.css}">
@@ -28,6 +28,7 @@
         </td>
     </tr>
 </table>
-<a class="btn" href="/transfers/new">Ajouter un nouveau transfert</a>
+<a sec:authorize="hasAnyAuthority('ADMIN')" class="btn" href="/transfers/new">Ajouter un nouveau transfert</a>
+<a  class="btn" href="/dashboard">Retourner au menu</a>
 </body>
 </html>
