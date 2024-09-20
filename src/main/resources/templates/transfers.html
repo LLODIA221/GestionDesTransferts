@@ -5,7 +5,9 @@
     <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body class="container">
-<h1>Liste des transferts</h1>
+
+<div style="text-align: center;"><h1>Liste des transferts</h1></div>
+<a sec:authorize="hasAnyAuthority('ADMIN')" class="btn" href="/transfers/new">Ajouter un nouveau transfert</a>
 <table>
     <tr>
         <th>ID</th>
@@ -28,7 +30,7 @@
         </td>
     </tr>
 </table>
-<a sec:authorize="hasAnyAuthority('ADMIN')" class="btn" href="/transfers/new">Ajouter un nouveau transfert</a>
+
 <a  class="btn" href="/dashboard">Retourner au menu</a>
 </body>
 </html>
