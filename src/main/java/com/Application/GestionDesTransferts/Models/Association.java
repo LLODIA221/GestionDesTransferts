@@ -7,6 +7,7 @@ import lombok.Data;
 @Entity
 @Data
 public class Association {
+    // ceci est un commentaire
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idAssociation;
