@@ -59,7 +59,7 @@ public class ZoneController {
         return "redirect:/zones";
     }
 
-    @GetMapping("/{id}/delete")
+    @PostMapping("/{id}/delete")
     public String deleteZone(@PathVariable Long id) {
         zoneService.deleteZone(id);
         return "redirect:/zones";

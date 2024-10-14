@@ -1,5 +1,6 @@
 package com.Application.GestionDesTransferts.Controller;
 import com.Application.GestionDesTransferts.Dto.UserDto;
+import com.Application.GestionDesTransferts.Models.User;
 import com.Application.GestionDesTransferts.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -9,6 +10,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
+import java.util.List;
+import java.util.Optional;
 
 @Controller
 public class UserController {
@@ -61,6 +64,47 @@ public class UserController {
 
         return "redirect:/dashboard";
 
+    }
+
+    // Afficher la page pour modifier l'utilisateur
+    @GetMapping("/update-user/{id}")
+    public String getUpdateUserPage(@PathVariable("id") Long id, Model model) {
+        Optional<User> user = userService.getUserById(id);
+        if (user.isPresent()) {
+            UserDto userDto = new UserDto();
+            userDto.setEmail(user.get().getEmail());
+            userDto.setFullname(user.get().getFullname());
+            userDto.setRole(user.get().getRole());
+            model.addAttribute("user", userDto);
+            return "update-user";
+        }
+        model.addAttribute("error", "Utilisateur non trouvé");
+        return "error";
+    }
+
+    // Sauvegarder la mise à jour de l'utilisateur
+    @PostMapping("/update-user/{id}")
+    public String updateUser(@PathVariable("id") Long id, @ModelAttribute("user") UserDto userDto, Model model) {
+        userService.updateUser(userDto, id);
+        model.addAttribute("message", "Mise à jour réussie");
+        return "redirect:/dashboard";
+    }
+
+    // Supprimer un utilisateur
+    @PostMapping("/delete-user/{id}")
+    public String deleteUser(@PathVariable("id") Long id, Model model) {
+        userService.deleteUser(id);
+        model.addAttribute("message", "Utilisateur supprimé avec succès");
+        return "redirect:/dashboard";
+    }
+
+    //pages de l'admin
+    @GetMapping("/admin-settings")
+    public String getAdminSettings(Model model) {
+        // Récupérer la liste des utilisateurs
+        List<User> users = userService.findAllUsers();
+        model.addAttribute("users", users);
+        return "admin-settings";
     }
 
 

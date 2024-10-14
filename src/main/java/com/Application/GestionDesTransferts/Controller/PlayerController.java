@@ -68,7 +68,7 @@ public class PlayerController {
         return "redirect:/players";
     }
 
-    @GetMapping("/{id}/delete")
+    @PostMapping("/{id}/delete")
     public String deletePlayer(@PathVariable Long id) {
         playerService.deletePlayer(id);
         return "redirect:/players";

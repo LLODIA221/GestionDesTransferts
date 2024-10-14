@@ -3,6 +3,7 @@
 <head>
     <title>Liste des zones</title>
     <link rel="stylesheet" th:href="@{/css/style.css}">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body class="container">
 <div style="text-align: center;">
@@ -21,12 +22,58 @@
         <td>
             <a class="btn" th:href="@{/zones/{id}(id=${zone.idZone})}">Détails</a>
             <a class="btn" th:href="@{/zones/{id}/edit(id=${zone.idZone})}">Modifier</a>
-            <a class="btn" th:href="@{/zones/{id}/delete(id=${zone.idZone})}">Supprimer</a>
+<!--            <a class="btn" th:href="@{/zones/{id}/delete(id=${zone.idZone})}">Supprimer</a>-->
+            <a sec:authorize="hasAnyAuthority('ADMIN')" class="btn btn-danger" href="javascript:void(0);" th:onclick="'confirmDelete(' + ${zone.idZone} + ')'">
+                Supprimer
+            </a>
         </td>
     </tr>
 </table>
 
 <a  class="btn" href="/dashboard">Retourner au menu</a>
 
+<script th:inline="javascript">
+    function confirmDelete(idZone) {
+        Swal.fire({
+            title: "Êtes-vous sûr ?",
+            text: "Cette action est irréversible !",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Oui, supprimer !",
+            cancelButtonText: "Annuler"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                fetch('/zones/' + idZone + '/delete', {
+                    method: 'POST'
+                }).then(response => {
+                    if (response.ok) {
+                        Swal.fire({
+                            title: "Supprimé !",
+                            text: "la zone a bien été supprimée.",
+                            icon: "success"
+                        }).then(() => {
+                            location.reload(); // Reload page after deletion
+                        });
+                    } else {
+                        Swal.fire({
+                            title: "Erreur !",
+                            text: "La suppression a échoué , verifiez que l'elemen que vous essayez de supprimer n'est pas relier à un enregistrement.",
+                            icon: "error"
+                        });
+                    }
+                }).catch(error => {
+                    console.error('Erreur:', error);
+                    Swal.fire({
+                        title: "Erreur !",
+                        text: "Une erreur est survenue lors de la suppression.",
+                        icon: "error"
+                    });
+                });
+            }
+        });
+    }
+</script>
 </body>
 </html>

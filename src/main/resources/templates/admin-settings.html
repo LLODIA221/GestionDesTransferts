@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml"
+      xmlns="http://www.w3.org/1999/html">
+<head>
+  <link rel="stylesheet" th:href="@{/css/style.css}">
+  <meta charset="UTF-8">
+  <title>Page de L'administrateur</title>
+</head>
+<body class="container">
+<h2>Gestion des utilisateurs</h2>
+
+<!-- Table pour afficher tous les utilisateurs -->
+<table class="table">
+  <thead>
+  <tr>
+    <th>ID</th>
+    <th>Email</th>
+    <th>Nom complet</th>
+    <th>Rôle</th>
+    <th>Actions</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="user : ${users}">
+    <td th:text="${user.id}"></td>
+    <td th:text="${user.email}"></td>
+    <td th:text="${user.fullname}"></td>
+    <td th:text="${user.role}"></td>
+    <td>
+      <a th:href="@{'/update-user/' + ${user.id}}" class="btn btn-primary">Modifier</a>
+      <form th:action="@{'/delete-user/' + ${user.id}}" method="post" style="display:inline;">
+        <button type="submit" class="btn btn-danger">Supprimer</button>
+      </form>
+    </td>
+  </tr>
+  </tbody>
+</table>
+</body>
+
+</html>

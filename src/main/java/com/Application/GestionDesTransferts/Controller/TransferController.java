@@ -75,7 +75,7 @@ public class TransferController {
         return "redirect:/transfers";
     }
 
-    @GetMapping("/{id}/delete")
+    @PostMapping("/{id}/delete")
     public String deleteTransfer(@PathVariable Long id) {
         transferService.deleteTransfer(id);
         return "redirect:/transfers";

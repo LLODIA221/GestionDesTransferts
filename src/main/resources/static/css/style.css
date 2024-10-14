@@ -112,3 +112,14 @@ input[type="text"] {
     border: 1px solid #ddd;
     border-radius: 5px;
 }
+ dialog {
+            padding: 20px;
+            border: 1px solid #ccc;
+        }
+        .dialog-actions {
+            display: flex;
+            justify-content: flex-end;
+        }
+        .dialog-actions button {
+            margin-left: 10px;
+        }

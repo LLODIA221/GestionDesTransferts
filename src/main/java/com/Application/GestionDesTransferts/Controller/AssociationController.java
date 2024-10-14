@@ -61,9 +61,17 @@ public class AssociationController {
         return "redirect:/associations";
     }
 
-    @GetMapping("/{id}/delete")
-    public String deleteAssociation(@PathVariable Long id) {
-        associationService.deleteAssociation(id);
-        return "redirect:/associations";
-    }
+//    @GetMapping("/{id}/delete")
+//    public String deleteAssociation(@PathVariable Long id) {
+//        associationService.deleteAssociation(id);
+//        return "redirect:/associations";
+//    }
+//
+        @PostMapping("/{id}/delete")
+        public String deleteAssociation(@PathVariable Long id) {
+            associationService.deleteAssociation(id);
+            return "redirect:/associations"; // Redirect after deletion
+}
+
+
 }

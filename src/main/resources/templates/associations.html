@@ -2,13 +2,14 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml" lang="Fr">
 <head>
     <link rel="stylesheet" th:href="@{/css/style.css}">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <title>Liste des associations</title>
 </head>
 <body class="container">
 <h1>Liste des associations</h1>
-<div class="parameters" >
+<div class="parameters">
     <a sec:authorize="hasAnyAuthority('ADMIN')" class="btn" href="/associations/new">Ajouter une nouvelle association</a>
-</div >
+</div>
 <table>
     <tr>
         <th>ID</th>
@@ -23,12 +24,59 @@
         <td>
             <a class="btn" th:href="@{/associations/{id}(id=${association.idAssociation})}">Détails</a>
             <a sec:authorize="hasAnyAuthority('ADMIN')" class="btn-warning" th:href="@{/associations/{id}/edit(id=${association.idAssociation})}">Modifier</a>
-            <a sec:authorize="hasAnyAuthority('ADMIN')" class="btn-danger" th:href="@{/associations/{id}/delete(id=${association.idAssociation})}">Supprimer</a>
+            <a sec:authorize="hasAnyAuthority('ADMIN')" class="btn btn-danger" href="javascript:void(0);" th:onclick="'confirmDelete(' + ${association.idAssociation} + ')'">
+                Supprimer
+            </a>
         </td>
     </tr>
 </table>
-<div class="parameters" >
-    <a class="btn" href="/dashboard">retourner au menu</a>
-    </div >
+
+<div class="parameters">
+    <a class="btn" href="/dashboard">Retourner au menu</a>
+</div>
+
+<script th:inline="javascript">
+    function confirmDelete(idAssociation) {
+        Swal.fire({
+            title: "Êtes-vous sûr ?",
+            text: "Cette action est irréversible !",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Oui, supprimer !",
+            cancelButtonText: "Annuler"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                fetch('/associations/' + idAssociation + '/delete', {
+                    method: 'POST'
+                }).then(response => {
+                    if (response.ok) {
+                        Swal.fire({
+                            title: "Supprimé !",
+                            text: "L'association a bien été supprimée.",
+                            icon: "success"
+                        }).then(() => {
+                            location.reload(); // Reload page after deletion
+                        });
+                    } else {
+                        Swal.fire({
+                            title: "Erreur !",
+                            text: "La suppression a échoué, verifiez que l'elemen que vous essayez de supprimer n'est pas relier à un enregistrement.",
+                            icon: "error"
+                        });
+                    }
+                }).catch(error => {
+                    console.error('Erreur:', error);
+                    Swal.fire({
+                        title: "Erreur !",
+                        text: "Une erreur est survenue lors de la suppression.",
+                        icon: "error"
+                    });
+                });
+            }
+        });
+    }
+</script>
 </body>
 </html>
