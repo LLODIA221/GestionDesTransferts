@@ -6,8 +6,13 @@
 </head>
 <body class="container">
 <h1>Modifier le joueur</h1>
-<form th:action="@{/players/{id}(id=${player.idJoueur})}" th:object="${player}" method="post">
+<form th:action="@{/players/{id}(id=${player.idJoueur})}" th:object="${player}" method="post" enctype="multipart/form-data">
     <input type="hidden" th:field="*{idJoueur}"/>
+
+    <!-- Nouveau champ pour télécharger une photo -->
+    <label for="photo">Changer la photo :</label>
+    <input type="file" id="photo" name="photo" accept="image/*"/>
+    <br/>
 
     <label for="numeroIdentite">Numéro d'identité :</label>
     <input type="text" id="numeroIdentite" th:field="*{numeroIdentite}"/>
@@ -38,6 +43,8 @@
         <option th:each="association : ${associations}" th:value="${association.idAssociation}" th:text="${association.nomAssociation}"></option>
     </select>
     <br/>
+
+
 
     <button type="submit" class="btn">Enregistrer</button>
 </form>

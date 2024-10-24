@@ -6,6 +6,9 @@
 </head>
 <body class="container">
 <h1>Détails du joueur</h1>
+<p>Photo :</p>
+<img th:src="@{'/uploads/' + ${player.photo}}" alt="Photo du joueur" style="width: 150px; height: 150px;"/>
+
 <p>ID : <span th:text="${player.idJoueur}"></span></p>
 <p>Numéro d'identité : <span th:text="${player.numeroIdentite}"></span></p>
 <p>Nom : <span th:text="${player.nom}"></span></p>

@@ -23,4 +23,8 @@ public class Player {
     @ManyToOne
     @JoinColumn(name = "idAssociation")
     private Association association;
+
+
+    // Nouveau champ pour la photo
+    private String photo;
 }

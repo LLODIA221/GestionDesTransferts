@@ -17,8 +17,11 @@
     <br/>
 
     <label for="associationArrive">Association d'arrivée :</label>
-    <select id="associationArrive" th:field="*{associationArrive.idAssociation}">
-        <option th:each="association : ${associations}" th:value="${association.idAssociation}" th:text="${association.nomAssociation}"></option>
+    <!-- cette partie doit etre en mode readonly -->
+
+    <select id="associationArrive" th:field="*{associationArrive.idAssociation}" >
+
+        <option th:each="association : ${associations}" th:value="${association.idAssociation}" th:text="${association.nomAssociation}"    ></option>
     </select>
     <br/>
 

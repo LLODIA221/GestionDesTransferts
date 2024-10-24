@@ -6,7 +6,11 @@
 </head>
 <body class="container">
 <h1>Créer un nouveau joueur</h1>
-<form class="container" th:action="@{/players}" th:object="${player}" method="post">
+<form class="container" th:action="@{/players}" th:object="${player}" method="post" enctype="multipart/form-data">
+
+    <label for="photo">Photo du joueur :</label>
+    <input type="file" id="photo" name="file"/>
+
     <label for="numeroIdentite">Numéro d'identité :</label>
     <input type="text" id="numeroIdentite" th:field="*{numeroIdentite}"/>
     <br/>
