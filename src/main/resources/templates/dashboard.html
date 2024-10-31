@@ -3,152 +3,200 @@
       xmlns="http://www.w3.org/1999/html">
 <head>
     <link rel="stylesheet" th:href="@{/css/style.css}">
-    <title>Tableau de bord</title>
-    <style>
-        body.container {
-            display: flex;
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-        }
+    <title>Tableau de bord</title><style>
+    body.container {
+        display: flex;
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+    }
 
-        .sidebar {
-            width: 240px;
-            background-color: #2c3e50;
-            color: white;
-            padding: 20px;
-            box-sizing: border-box;
-            min-height: 100vh;
-        }
+    .sidebar {
+        width: 240px;
+        background-color: #2c3e50;
+        color: white;
+        padding: 20px;
+        box-sizing: border-box;
+        min-height: 100vh;
+    }
 
-        .sidebar h2 {
-            margin-bottom: 20px;
-        }
+    .sidebar h2 {
+        margin-bottom: 20px;
+    }
 
-        .sidebar a {
-            display: block;
-            padding: 10px 15px;
-            margin: 10px 0;
-            color: white;
-            text-decoration: none;
-            border-radius: 5px;
-        }
+    .sidebar a {
+        display: block;
+        padding: 10px 15px;
+        margin: 10px 0;
+        color: white;
+        text-decoration: none;
+        border-radius: 5px;
+    }
 
-        .sidebar a:hover {
-            background-color: #34495e;
-        }
+    .sidebar a:hover {
+        background-color: #34495e;
+    }
 
-        .main-content {
-            flex: 1;
-            padding: 20px;
-            box-sizing: border-box;
-        }
+    .main-content {
+        flex: 1;
+        padding: 20px;
+        box-sizing: border-box;
+    }
 
-        .main-content h2 {
-            margin-bottom: 20px;
-        }
+    .main-content h2 {
+        margin-bottom: 20px;
+    }
 
-        .statistics, .parameters {
-            margin-top: 20px;
-        }
+    .statistics, .parameters {
+        margin-top: 20px;
+    }
 
-        .statistics {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-            gap: 20px;
-        }
+    .statistics {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+        gap: 20px;
+    }
 
-        .statistic, .parameter {
-            background-color: #ecf0f1;
-            padding: 20px;
-            border-radius: 10px;
-            text-align: center;
-        }
+    .statistic, .parameter {
+        background-color: #ecf0f1;
+        padding: 20px;
+        border-radius: 10px;
+        text-align: center;
+    }
 
-        .parameters .parameter {
-            margin-bottom: 20px;
-        }
+    .parameters .parameter {
+        margin-bottom: 20px;
+    }
 
-        .role-display {
-            margin-bottom: 20px;
-            font-size: 1.2em;
-        }
-    </style>
+    .role-display {
+        margin-bottom: 20px;
+        font-size: 1.2em;
+    }
+</style>
 </head>
 <body class="container">
 <div class="sidebar">
     <h2>Tableau de bord</h2>
-    <!-- Afficher pour tous les utilisateurs -->
+    <!-- Navigation générale -->
     <a th:href="@{/players}">Listes des Joueurs</a>
     <a th:href="@{/associations}">Listes des équipes</a>
     <a th:href="@{/zones}">Listes des Zones</a>
-    <a th:href="@{/transfers}">Listes des tranferts</a>
+    <a th:href="@{/transfers}">Listes des transferts</a>
+    <a th:href="@{/licences}">Listes des licences</a>
 
-    <!-- Afficher uniquement pour les administrateurs -->
+    <!-- Navigation pour administrateurs -->
     <div sec:authorize="hasAnyAuthority('ADMIN')">
         <a th:href="@{/admin-tools}">Outils Admin</a>
         <a th:href="@{/user-management}">Gestion des utilisateurs</a>
     </div>
 
-    <!-- Afficher uniquement pour les utilisateurs standards -->
+    <!-- Navigation pour utilisateurs standards -->
     <div sec:authorize="hasAnyAuthority('USER')">
         <a th:href="@{/user-tools}">Outils Utilisateur</a>
     </div>
 
-    <!-- Afficher pour tous les utilisateurs -->
+    <!-- Liens communs -->
     <a th:href="@{/settings}">Paramètres</a>
     <a th:href="@{/logout}">Déconnexion</a>
 </div>
 
 <div class="main-content">
+    <!-- Affichage du rôle et du nom de l'utilisateur -->
     <div class="role-display">
-        <h2> Bienvenue, <span  th:text="${username}">Bonjour utilisateur</span> </h2>
+        <h2>Bienvenue, <span th:text="${#authentication.principal.fullname}">Bonjour utilisateur</span></h2>
         <p>Rôles attribués :</p>
         <ul>
             <li th:each="authority : ${#authentication.principal.authorities}" th:text="${authority.getAuthority()}"></li>
         </ul>
     </div>
 
+    <!-- Statistiques générales -->
     <h2>STATISTIQUES</h2>
-
-    <!-- Afficher des statistiques spécifiques aux administrateurs -->
     <div class="statistics" sec:authorize="hasAnyAuthority('ADMIN')">
-        <div class="statistic">
-            <h3>Nombre d'equipes</h3>
-            <p th:text="${nbEquipe}"></p>
-        </div>
-        <div class="statistic">
-            <h3>Nombre de joueurs</h3>
-            <p th:text="${nbJoueurs}"></p>
-        </div>
-        <div class="statistic">
-            <h3>Nombre de zones</h3>
-            <p th:text="${nbZone}"></p>
-        </div>
-        <div class="statistic">
-            <h3>Nombre de transfert</h3>
-            <p th:text="${transfer}"></p>
-        </div>
+        <div class="statistic"><h3>Nombre d'équipes</h3><p th:text="${nbEquipe}"></p></div>
+        <div class="statistic"><h3>Nombre de joueurs</h3><p th:text="${nbJoueurs}"></p></div>
+        <div class="statistic"><h3>Nombre de zones</h3><p th:text="${nbZone}"></p></div>
+        <div class="statistic"><h3>Nombre de transferts</h3><p th:text="${transfer}"></p></div>
     </div>
-
-    <!-- Afficher des statistiques spécifiques aux utilisateurs standards -->
     <div class="statistics" sec:authorize="hasAnyAuthority('USER')">
-        <div class="statistic">
-            <h3>Nombre d'equipes</h3>
-            <p th:text="${nbEquipes}"></p>
-        </div>
-        <div class="statistic">
-            <h3>Nombre de joueurs</h3>
-            <p th:text="${nbJoueurs}"></p>
-        </div>
+        <div class="statistic"><h3>Nombre d'équipes</h3><p th:text="${nbEquipes}"></p></div>
+        <div class="statistic"><h3>Nombre de joueurs</h3><p th:text="${nbJoueurs}"></p></div>
     </div>
 
-    <!-- Afficher les paramètres pour les administrateurs uniquement -->
+    <!-- Paramètres spécifiques aux administrateurs -->
     <div class="parameters" sec:authorize="hasAnyAuthority('ADMIN')">
         <div class="parameter">
             <a th:href="@{/admin-settings}">Paramètres Admin</a>
         </div>
     </div>
+
+    <!-- Statistiques des licences -->
+    <div class="dashboard-section">
+        <h2>Statistiques des Licences</h2>
+        <div class="stats-cards">
+            <div class="stat-card"><h3>Total Licences</h3><p class="stat-number" th:text="${totalLicences}">0</p></div>
+            <div class="stat-card"><h3>Licences Valides</h3><p class="stat-number" th:text="${licencesValides}">0</p><p class="stat-percentage" th:text="${pourcentageValides + '%'}">0%</p></div>
+            <div class="stat-card"><h3>Licences Expirées</h3><p class="stat-number" th:text="${licencesExpirees}">0</p></div>
+        </div>
+        <div class="chart-container">
+            <canvas id="zoneChart"></canvas>
+        </div>
+        <div class="chart-container">
+            <canvas id="monthlyChart"></canvas>
+        </div>
+    </div>
 </div>
+
+<!-- Graphiques JavaScript -->
+<script th:inline="javascript">
+    // Graphique par zone
+    const zoneData = /*[[${statsParZone}]]*/ [];
+    new Chart(document.getElementById('zoneChart'), {
+        type: 'bar',
+        data: {
+            labels: zoneData.map(item => item.nomZone),
+            datasets: [{
+                label: 'Licences Valides',
+                data: zoneData.map(item => item.licencesValides),
+                backgroundColor: '#4CAF50'
+            }, {
+                label: 'Licences Expirées',
+                data: zoneData.map(item => item.licencesExpirees),
+                backgroundColor: '#f44336'
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                title: { display: true, text: 'Licences par Zone' }
+            },
+            scales: {
+                x: { stacked: true },
+                y: { stacked: true }
+            }
+        }
+    });
+
+    // Graphique mensuel
+    const monthlyData = /*[[${licencesParMois}]]*/ {};
+    new Chart(document.getElementById('monthlyChart'), {
+        type: 'line',
+        data: {
+            labels: Object.keys(monthlyData),
+            datasets: [{
+                label: 'Licences délivrées',
+                data: Object.values(monthlyData),
+                borderColor: '#2196F3',
+                tension: 0.1
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                title: { display: true, text: 'Évolution mensuelle des licences' }
+            }
+        }
+    });
+</script>
 </body>
 </html>

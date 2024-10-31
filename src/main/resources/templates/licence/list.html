@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Liste des Licences</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body class="container">
+<h1>Liste des Licences</h1>
+
+<div th:if="${success}" class="alert alert-success" th:text="${success}"></div>
+<div th:if="${error}" class="alert alert-danger" th:text="${error}"></div>
+
+<table class="table">
+    <thead>
+    <tr>
+        <th>Numéro de Licence</th>
+        <th>Joueur</th>
+        <th>Date de Délivrance</th>
+        <th>Zone</th>
+        <th>Statut</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="licence : ${licences}">
+        <td th:text="${licence.numeroLicence}"></td>
+        <td th:text="${licence.nomJoueur}"></td>
+        <td th:text="${licence.dateDelivrance}"></td>
+        <td th:text="${licence.zone}"></td>
+        <td>
+                    <span th:if="${@licenceService.isLicenceValide(licence.idLicence)}"
+                          class="badge badge-success">Valide</span>
+            <span th:unless="${@licenceService.isLicenceValide(licence.idLicence)}"
+                  class="badge badge-danger">Expirée</span>
+        </td>
+        <td>
+            <a th:href="@{/licences/{id}(id=${licence.idLicence})}" class="btn btn-info">Voir</a>
+            <a th:href="@{/licences/{id}/renouveler(id=${licence.idLicence})}"
+               th:unless="${@licenceService.isLicenceValide(licence.idLicence)}"
+               class="btn btn-warning">Renouveler</a>
+            <form th:action="@{/licences/{id}/delete(id=${licence.idLicence})}"
+                  method="post" style="display: inline;">
+                <button type="submit" class="btn btn-danger"
+                        onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette licence ?')">
+                    Supprimer
+                </button>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

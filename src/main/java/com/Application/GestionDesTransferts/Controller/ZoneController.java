@@ -1,4 +1,5 @@
-package com.Application.GestionDesTransferts.Controller;// ZoneController
+package com.Application.GestionDesTransferts.Controller;
+
 import com.Application.GestionDesTransferts.Models.Association;
 import com.Application.GestionDesTransferts.Models.Zone;
 
@@ -19,19 +20,19 @@ public class ZoneController {
     @GetMapping
     public String getAllZones(Model model) {
         model.addAttribute("zones", zoneService.getAllZones());
-        return "zones";
+        return "zone/zones";
     }
 
     @GetMapping("/{id}")
     public String getZoneById(@PathVariable Long id, Model model) {
         model.addAttribute("zone", zoneService.getZoneById(id));
-        return "zone";
+        return "zone/zone";
     }
 
     @GetMapping("/new")
     public String createZoneForm(Model model) {
         model.addAttribute("zone", new Zone());
-        return "createZone";
+        return "zone/createZone";
     }
 
     @PostMapping
@@ -45,7 +46,7 @@ public class ZoneController {
         model.addAttribute("zone", zoneService.getZoneById(id));
         List<Zone> zones = zoneService.getAllZones();
         model.addAttribute("zones", zones);
-        return "editZone";
+        return "zone/editZone";
     }
 
     @PostMapping("/{id}")

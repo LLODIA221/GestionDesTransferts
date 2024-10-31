@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <title>Détails de la Licence</title>
+</head>
+<body class="container">
+<h1>Licence du joueur</h1>
+<!-- Update the image source to use the licence's photo -->
+<div class="photo-container">
+    <img th:if="${licence.photo != null}"
+         th:src="@{'/uploads/' + ${licence.photo}}"
+         alt="Photo du joueur"
+         style="width: 150px; height: 150px;"/>
+    <p th:if="${licence.photo == null}" class="no-photo">Aucune photo disponible</p>
+</div>
+<p>Nom du joueur : <span th:text="${licence.nomJoueur}"></span></p>
+<p>Numéro de licence : <span th:text="${licence.numeroLicence}"></span></p>
+<p>Date de délivrance : <span th:text="${licence.dateDelivrance}"></span></p>
+<p>Date de naissance : <span th:text="${licence.dateDeNaissance}"></span></p>
+<p>Lieu de naissance : <span th:text="${licence.lieuDeNaissance}"></span></p>
+<p>Zone : <span th:text="${licence.zone}"></span></p>
+
+<!-- Bouton d'impression -->
+<button onclick="window.print()">Imprimer la licence</button>
+<a class="btn" th:href="@{/players}">Retour aux détails du joueur</a>
+</body>
+</html>

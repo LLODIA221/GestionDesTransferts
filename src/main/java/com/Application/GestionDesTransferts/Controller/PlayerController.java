@@ -33,13 +33,13 @@ public class PlayerController {
     @GetMapping
     public String getAllPlayers(Model model) {
         model.addAttribute("players", playerService.getAllPlayers());
-        return "players";
+        return "player/players";
     }
 
     @GetMapping("/{id}")
     public String getPlayerById(@PathVariable Long id, Model model) {
         model.addAttribute("player", playerService.getPlayerById(id));
-        return "player";
+        return "player/player";
     }
 
     @GetMapping("/new")
@@ -47,7 +47,7 @@ public class PlayerController {
         model.addAttribute("player", new Player());
         List<Association> associations = associationService.getAllAssociations();
         model.addAttribute("associations", associations);
-        return "createPlayer";
+        return "player/createPlayer";
     }
 
 //    @PostMapping
@@ -80,7 +80,7 @@ public String savePlayer(@ModelAttribute Player player, @RequestParam("file") Mu
         model.addAttribute("player", playerService.getPlayerById(id));
         List<Association> associations = associationService.getAllAssociations();
         model.addAttribute("associations", associations);
-        return "editPlayer";
+        return "player/editPlayer";
     }
 
 //    @PostMapping("/{id}")

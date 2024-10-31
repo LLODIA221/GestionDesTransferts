@@ -1,4 +1,6 @@
-package com.Application.GestionDesTransferts.Controller;// AssociationController
+package com.Application.GestionDesTransferts.Controller;
+
+
 import com.Application.GestionDesTransferts.Models.Association;
 import com.Application.GestionDesTransferts.Models.Zone;
 import com.Application.GestionDesTransferts.Service.AssociationService;
@@ -20,13 +22,13 @@ public class AssociationController {
     @GetMapping
     public String getAllAssociations(Model model) {
         model.addAttribute("associations", associationService.getAllAssociations());
-        return "associations";
+        return "association/associations";
     }
 
     @GetMapping("/{id}")
     public String getAssociationById(@PathVariable Long id, Model model) {
         model.addAttribute("association", associationService.getAssociationById(id));
-        return "association";
+        return "association/association";
     }
 
     @GetMapping("/new")
@@ -34,7 +36,7 @@ public class AssociationController {
         model.addAttribute("association", new Association());
         List<Zone> zones = zoneService.getAllZones();
         model.addAttribute("zones", zones);
-        return "createAssociation";
+        return "association/createAssociation";
     }
 
     @PostMapping
@@ -48,7 +50,7 @@ public class AssociationController {
         model.addAttribute("association", associationService.getAssociationById(id));
         List<Zone> zones = zoneService.getAllZones();
         model.addAttribute("zones", zones);
-        return "editAssociation";
+        return "association/editAssociation";
     }
 
     @PostMapping("/{id}")
@@ -61,17 +63,12 @@ public class AssociationController {
         return "redirect:/associations";
     }
 
-//    @GetMapping("/{id}/delete")
-//    public String deleteAssociation(@PathVariable Long id) {
-//        associationService.deleteAssociation(id);
-//        return "redirect:/associations";
-//    }
-//
-        @PostMapping("/{id}/delete")
-        public String deleteAssociation(@PathVariable Long id) {
-            associationService.deleteAssociation(id);
-            return "redirect:/associations"; // Redirect after deletion
-}
+
+    @PostMapping("/{id}/delete")
+    public String deleteAssociation(@PathVariable Long id) {
+        associationService.deleteAssociation(id);
+        return "redirect:/associations"; // Redirect after deletion
+    }
 
 
 }

@@ -1,6 +1,6 @@
 /* Style de base pour le conteneur */
 .container {
-    width: 80%;
+    width: 90%;
     margin: auto;
     padding: 20px;
 }
@@ -33,7 +33,6 @@ display: inline-block;
     text-decoration: none;
     border-radius: 5px;
 }
-
 .btn:hover {
     background-color: #0056b3;
 }
@@ -53,11 +52,9 @@ th, td {
     padding: 10px;
     border: 1px solid #ddd;
 }
-
 th {
     background-color: #f2f2f2;
 }
-
 tr:nth-child(even) {
     background-color: #f9f9f9;
 }
@@ -82,7 +79,7 @@ tr:nth-child(even) {
     clear: both;
 }
 
-/* Statistic boxes */
+/* Boîtes de statistique */
 .statistic {
     margin: 20px 0;
     padding: 20px;
@@ -91,11 +88,13 @@ tr:nth-child(even) {
     border-radius: 5px;
 }
 
+/* Messages */
 .message {
     color: red;
     margin: 10px 0;
 }
-/* Styles pour les sélecteurs */
+
+/* Champs de formulaire */
 select {
     width: 100%;
     padding: 10px;
@@ -103,8 +102,6 @@ select {
     border: 1px solid #ddd;
     border-radius: 5px;
 }
-
-/* Styles pour les champs de texte */
 input[type="text"] {
     width: 80%;
     padding: 10px;

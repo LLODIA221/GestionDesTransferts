@@ -27,13 +27,13 @@ public class TransferController {
     @GetMapping
     public String getAllTransfers(Model model) {
         model.addAttribute("transfers", transferService.getAllTransfers());
-        return "transfers";
+        return "transfer/transfers";
     }
 
     @GetMapping("/{id}")
     public String getTransferById(@PathVariable Long id, Model model) {
         model.addAttribute("transfer", transferService.getTransferById(id));
-        return "transfer";
+        return "transfer/transfer";
     }
 
     @GetMapping("/new")
@@ -43,7 +43,7 @@ public class TransferController {
         model.addAttribute("players", playerService.getAllPlayers());
         List<Association> associations = associationService.getAllAssociations();
         model.addAttribute("associations", associationService.getAllAssociations());
-        return "createTransfer";
+        return "transfer/createTransfer";
     }
 
     @PostMapping
@@ -59,7 +59,7 @@ public class TransferController {
         model.addAttribute("players", playerService.getAllPlayers());
         List<Association> associations = associationService.getAllAssociations();
         model.addAttribute("associations", associationService.getAllAssociations());
-        return "editTransfer";
+        return "transfer/editTransfer";
     }
 
     @PostMapping("/{id}")

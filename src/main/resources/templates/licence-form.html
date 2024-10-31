@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <link rel="stylesheet" th:href="@{/css/style.css}">
+  <title>Générer la Licence</title>
+</head>
+<body class="container">
+<h1>Générer la Licence</h1>
+<form th:action="@{/licences/generate}" method="post">
+  <input type="hidden" name="playerId" th:value="${playerId}"/>
+  <label for="dateDelivrance">Date de délivrance :</label>
+  <input type="date" id="dateDelivrance" name="dateDelivrance" required/>
+  <button type="submit">Générer la licence</button>
+</form>
+</body>
+</html>

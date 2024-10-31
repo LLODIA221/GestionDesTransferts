@@ -19,5 +19,18 @@
 <p>Association : <span th:text="${player.association?.nomAssociation}"></span></p>
 <a class="btn" th:href="@{/players/{id}/edit(id=${player.idJoueur})}">Modifier</a>
 <a class="btn" th:href="@{/players}">Retour à la liste</a>
+
+<!-- Bouton pour générer la licence -->
+<a class="btn" th:href="@{/licences/generate/{playerId}(playerId=${player.idJoueur})}">Générer la licence</a>
+
+<!-- Message d'erreur -->
+<div th:if="${error}" class="alert alert-danger" role="alert">
+    <span th:text="${error}"></span>
+</div>
+
+<!-- Message de succès -->
+<div th:if="${success}" class="alert alert-success" role="alert">
+    <span th:text="${success}"></span>
+</div>
 </body>
 </html>
