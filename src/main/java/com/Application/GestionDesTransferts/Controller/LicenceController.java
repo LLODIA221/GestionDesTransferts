@@ -73,7 +73,7 @@ public class LicenceController {
             LicenceDTO licence = licenceService.getLicenceById(id);
             model.addAttribute("licence", licence);
 //            return "licence/details";
-            return "licence-details";
+            return "licence/details";
         } catch (RuntimeException e) {
             model.addAttribute("error", e.getMessage());
             return "redirect:/licences";
