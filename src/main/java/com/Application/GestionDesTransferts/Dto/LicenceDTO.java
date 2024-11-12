@@ -12,5 +12,7 @@ public class LicenceDTO {
     private String numeroIdentite;
     private String numeroLicence;
     private String dateDelivrance;
+    private String dateExpiration;
+
     private String photo;
 }

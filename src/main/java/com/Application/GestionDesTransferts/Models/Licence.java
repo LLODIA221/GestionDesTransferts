@@ -5,35 +5,44 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDate;
+
 @Getter
 @Setter
 @Entity
-@Data
 @Table(name = "licence", uniqueConstraints = {
         @UniqueConstraint(columnNames = {"idJoueur"}, name = "UK_licence_joueur")
 })
+@Data
 public class Licence {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idLicence;
 
     @OneToOne
-    @JoinColumn(name = "idJoueur" ,unique=true)
-    private Player joueur; // Référence au joueur pour récupérer les informations
+    @JoinColumn(name = "idJoueur", unique = true)
+    private Player joueur;
 
     @ManyToOne
     @JoinColumn(name = "idZone")
     private Zone zone;
 
-    private String numeroLicence; // Numéro généré à partir de l'identité du joueur
+    private String numeroLicence;
     private String dateDelivrance;
-    private  String photo;
+    private String dateExpiration; // Nouveau champ pour la date d'expiration
+    private String photo;
 
-
-
+    // Méthode pour générer le numéro de licence
     public void genererNumeroLicence() {
-        // Remplace les trois premiers chiffres du numéro d'identité par "000"
         this.numeroLicence = "0000" + this.joueur.getNumeroIdentite().substring(4);
+    }
+
+    // Méthode pour calculer la date d'expiration
+    public void calculerDateExpiration() {
+        if (this.dateDelivrance != null) {
+            LocalDate delivranceDate = LocalDate.parse(this.dateDelivrance);
+            this.dateExpiration = delivranceDate.plusYears(1).toString(); // Par exemple, 1 an de validité
+        }
     }
 
     // Méthodes pour obtenir les informations du joueur

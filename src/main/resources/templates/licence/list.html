@@ -9,7 +9,7 @@
 
 <div th:if="${success}" class="alert alert-success" th:text="${success}"></div>
 <div th:if="${error}" class="alert alert-danger" th:text="${error}"></div>
-
+<a class="btn" th:href="@{/dashboard}">Retour au Menu</a>
 <table class="table">
     <thead>
     <tr>
@@ -17,7 +17,7 @@
         <th>Joueur</th>
         <th>Date de Délivrance</th>
         <th>Zone</th>
-        <th>Statut</th>
+        <th>Date d'expiration</th>
         <th>Actions</th>
     </tr>
     </thead>
@@ -27,12 +27,14 @@
         <td th:text="${licence.nomJoueur}"></td>
         <td th:text="${licence.dateDelivrance}"></td>
         <td th:text="${licence.zone}"></td>
-        <td>
-                    <span th:if="${@licenceService.isLicenceValide(licence.idLicence)}"
-                          class="badge badge-success">Valide</span>
-            <span th:unless="${@licenceService.isLicenceValide(licence.idLicence)}"
-                  class="badge badge-danger">Expirée</span>
-        </td>
+        <td th:text="${licence.dateExpiration}"></td>
+<!--        <td>-->
+<!--&lt;!&ndash;                    <span th:if="${@licenceService.isLicenceValide(licence.idLicence)}"&ndash;&gt;-->
+<!--&lt;!&ndash;                          class="badge badge-success">Valide</span>&ndash;&gt;-->
+<!--&lt;!&ndash;            <span th:unless="${@licenceService.isLicenceValide(licence.idLicence)}"&ndash;&gt;-->
+<!--&lt;!&ndash;                  class="badge badge-danger">Expirée</span>&ndash;&gt;-->
+<!--        -->
+<!--        </td>-->
         <td>
             <a th:href="@{/licences/{id}(id=${licence.idLicence})}" class="btn btn-info">Voir</a>
             <a th:href="@{/licences/{id}/renouveler(id=${licence.idLicence})}"

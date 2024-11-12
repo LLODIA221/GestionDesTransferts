@@ -11,6 +11,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+// LicenceController.java
 @Controller
 @RequestMapping("/licences")
 public class LicenceController {
@@ -18,23 +19,21 @@ public class LicenceController {
     @Autowired
     private LicenceService licenceService;
 
-    // Liste des licences
+    // ======= Liste des licences =======
     @GetMapping
     public String listLicences(Model model) {
         model.addAttribute("licences", licenceService.getAllLicences());
         return "licence/list";
     }
 
-   
-
-    // Formulaire de création
+    // ======= Formulaire de création =======
     @GetMapping("/create")
     public String createLicenceForm(@RequestParam Long playerId, Model model) {
         model.addAttribute("playerId", playerId);
         return "licence/create";
     }
 
-    // Créer une licence
+    // ======= Créer une licence =======
     @PostMapping("/create")
     public String createLicence(@RequestParam Long playerId,
                                 @RequestParam String dateDelivrance,
@@ -48,31 +47,26 @@ public class LicenceController {
             return "redirect:/players/" + playerId;
         }
     }
+
+    // ======= Générer une licence avec la date actuelle =======
     @GetMapping("/generate/{playerId}")
     public String generateLicence(@PathVariable Long playerId, Model model) {
         try {
-            // Générer la date de délivrance actuelle
             String dateDelivrance = LocalDate.now().format(DateTimeFormatter.ISO_DATE);
-
-            // Créer la licence
             LicenceDTO licence = licenceService.createLicence(playerId, dateDelivrance);
-
-            // Rediriger vers la page de détails de la licence
             return "redirect:/licences/" + licence.getIdLicence();
         } catch (RuntimeException e) {
-            // En cas d'erreur, rediriger vers la page du joueur avec un message d'erreur
             model.addAttribute("error", e.getMessage());
             return "redirect:/players/" + playerId;
         }
     }
 
-    // Méthode pour afficher les détails de la licence
+    // ======= Afficher les détails d'une licence =======
     @GetMapping("/{id}")
     public String showLicence(@PathVariable Long id, Model model) {
         try {
             LicenceDTO licence = licenceService.getLicenceById(id);
             model.addAttribute("licence", licence);
-//            return "licence/details";
             return "licence/details";
         } catch (RuntimeException e) {
             model.addAttribute("error", e.getMessage());
@@ -80,14 +74,14 @@ public class LicenceController {
         }
     }
 
-    // Formulaire de renouvellement
+    // ======= Formulaire de renouvellement de licence =======
     @GetMapping("/{id}/renouveler")
     public String renouvelerLicenceForm(@PathVariable Long id, Model model) {
         model.addAttribute("licence", licenceService.getLicenceById(id));
         return "licence/renouveler";
     }
 
-    // Renouveler une licence
+    // ======= Renouveler une licence =======
     @PostMapping("/{id}/renouveler")
     public String renouvelerLicence(@PathVariable Long id,
                                     @RequestParam String nouvelleDateDelivrance,
@@ -102,7 +96,7 @@ public class LicenceController {
         }
     }
 
-    // Supprimer une licence
+    // ======= Supprimer une licence =======
     @PostMapping("/{id}/delete")
     public String deleteLicence(@PathVariable Long id, RedirectAttributes redirectAttributes) {
         try {

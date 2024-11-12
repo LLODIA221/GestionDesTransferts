@@ -48,11 +48,11 @@ public class LicenceService {
         Player joueur = playerRepository.findById(playerId)
                 .orElseThrow(() -> new RuntimeException("Joueur non trouvé"));
 
-        // Création de la licence
         Licence licence = new Licence();
         licence.setJoueur(joueur);
         licence.setZone(joueur.getAssociation().getZone());
         licence.setDateDelivrance(dateDelivrance);
+        licence.calculerDateExpiration(); // Calculer et définir la date d'expiration
         licence.genererNumeroLicence();
         licence.setPhoto(joueur.getPhoto());
 
@@ -91,21 +91,14 @@ public class LicenceService {
     // ========== OPÉRATIONS SPÉCIFIQUES ==========
 
     public LicenceDTO renouvelerLicence(Long licenceId, String nouvelleDateDelivrance) {
-        if (nouvelleDateDelivrance == null) {
-            throw new IllegalArgumentException("La nouvelle date ne peut pas être null");
-        }
-
         Licence licence = licenceRepository.findById(licenceId)
                 .orElseThrow(() -> new RuntimeException("Licence non trouvée"));
 
         // Validation de la nouvelle date
-        try {
-            LocalDate.parse(nouvelleDateDelivrance);
-        } catch (DateTimeParseException e) {
-            throw new IllegalArgumentException("Format de date invalide");
-        }
+        LocalDate.parse(nouvelleDateDelivrance);
 
         licence.setDateDelivrance(nouvelleDateDelivrance);
+        licence.calculerDateExpiration(); // Recalculer la date d'expiration
         licence.genererNumeroLicence();
 
         return mapToDTO(licenceRepository.save(licence));
@@ -176,8 +169,7 @@ public class LicenceService {
                 ));
     }
 
-    // ========== MÉTHODES DE MAPPING ==========
-
+    // Mapping pour inclure la date d'expiration dans le DTO
     private LicenceDTO mapToDTO(Licence licence) {
         LicenceDTO dto = new LicenceDTO();
         dto.setIdLicence(licence.getIdLicence());
@@ -188,6 +180,7 @@ public class LicenceService {
         dto.setNumeroIdentite(licence.getNumeroIdentite());
         dto.setNumeroLicence(licence.getNumeroLicence());
         dto.setDateDelivrance(licence.getDateDelivrance());
+        dto.setDateExpiration(licence.getDateExpiration()); // Inclure la date d'expiration
         dto.setPhoto(licence.getPhoto());
         return dto;
     }
